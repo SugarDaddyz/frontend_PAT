@@ -44,6 +44,7 @@
                       >Email Address
                     </div>
                     <v-text-field
+                      type="email"
                       placeholder="Type your email address"
                       outlined
                     ></v-text-field>
@@ -55,6 +56,7 @@
                       >Password
                     </div>
                     <v-text-field
+                      type="password"
                       placeholder="Type your password"
                       outlined
                     ></v-text-field>
@@ -133,7 +135,7 @@
 }
 
 .signup-text {
-  color: #2A4365;;
+  color: #2a4365;
   font-size: 20px;
   font-family: "Nunito", sans-serif;
 }
