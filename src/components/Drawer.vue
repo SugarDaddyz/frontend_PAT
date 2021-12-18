@@ -44,18 +44,24 @@ export default {
         icon: "mdi-account",
         title: "User Management",
         tooltip: "User Management",
+        to: "Users"
       },
-      { icon: "mdi-source-branch", title: "Cabang", tooltip: "Cabang" },
+      {
+        icon: "mdi-source-branch",
+        title: "Cabang",
+        tooltip: "Cabang",
+        to: "Cabang",
+      },
       {
         icon: "mdi-cash-register",
         title: "Transaksi",
         tooltip: "Transaksi",
-        to: "",
+        to: "Transaksi",
       },
-      { icon: "mdi-cart", title: "Product", tooltip: "Product" },
+      { icon: "mdi-cart", title: "Product", tooltip: "Product", to: "Product" },
     ],
     // mini: true,
-   drawer: true,
+    drawer: true,
   }),
 };
 </script>
