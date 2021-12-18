@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <div class="my-8 title-text">Dashboard</div>
+    <div class="my-8 mx-2 title-text">Dashboard</div>
+    <!-- Info Statistic I -->
     <v-row>
-      <!-- Users -->
       <v-col cols="12" sm="6" md="3" v-for="info in infos" :key="info.title">
         <v-card class="ma-2">
           <v-row class="px-9 text-center">
