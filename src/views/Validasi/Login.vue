@@ -127,6 +127,7 @@ export default {
     },
     login() {
       this.loading = true;
+      this.$router.push({ name: "Home" });
     },
   },
 };
