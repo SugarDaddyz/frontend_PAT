@@ -1,102 +1,136 @@
 <template>
   <v-content>
-    <v-row>
-      <!-- Left Side -->
-      <v-col class="bg-login-logo" cols="7">
-        <v-row class="img-login ma-12 pa-12">
-          <v-col cols="12">
-            <div class="action">
-              <v-img
-                contain
-                src="../../assets/login-img.svg"
-                height="100%"
-                width="100%"
-              />
-            </div>
-          </v-col>
-        </v-row>
-      </v-col>
+    <v-form>
+      <v-row>
+        <!-- Left Side -->
+        <v-col class="bg-login-logo" cols="7" sm="7" v-if="isMobile()">
+          <v-row class="img-login ma-12 pa-12">
+            <v-col cols="12">
+              <div class="action">
+                <v-img
+                  contain
+                  src="../../assets/login-img.svg"
+                  height="100%"
+                  width="100%"
+                />
+              </div>
+            </v-col>
+          </v-row>
+        </v-col>
 
-      <!-- Right Side -->
-      <v-col cols="5">
-        <v-row class="form-login">
-          <v-col class="my-8 py-8" cols="12">
-            <!-- Header Form -->
-            <div class="action">
-              <v-img
-                contain
-                src="../../assets/logo-form.svg"
-                height="57px"
-                width="232px"
-              />
-            </div>
-            <!-- title form -->
-            <div class="text-center my-8 login-text">Login your account</div>
+        <!-- Right Side -->
+        <v-col cols="12" sm="12" md="5">
+          <v-row class="form-login">
+            <v-col class="my-8 py-8" cols="12">
+              <!-- Header Form -->
+              <div class="action">
+                <v-img
+                  contain
+                  src="../../assets/logo-form.svg"
+                  height="57px"
+                  width="100%"
+                />
+              </div>
+              <!-- title form -->
+              <div class="text-center my-8 login-text">Login your account</div>
 
-            <!-- Form Login -->
-            <div class="action">
-              <v-form>
+              <!-- Form Login -->
+              <div class="action">
                 <v-row>
-                  <v-col cols="12" sm="6" md="12">
+                  <v-col cols="12" sm="12" md="12">
                     <div class="email-title mb-1">
-                      <v-icon medium color="#2a4365" class="mr-2">
+                      <v-icon medium color="#2a4365" class="mr-2 mx-8">
                         mdi-email </v-icon
                       >Email Address
                     </div>
                     <v-text-field
+                      class="mx-8"
+                      color="#2a4365"
                       type="email"
+                      v-model="email"
                       placeholder="Type your email address"
                       outlined
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="12">
+                  <v-col cols="12" sm="12" md="12">
                     <div class="email-title mb-1">
-                      <v-icon medium color="#2a4365" class="mr-2">
+                      <v-icon medium color="#2a4365" class="mr-2 mx-8">
                         mdi-lock </v-icon
                       >Password
                     </div>
                     <v-text-field
+                      id="password"
+                      class="mx-8"
+                      color="#2a4365"
                       type="password"
+                      v-model="password"
                       placeholder="Type your password"
                       outlined
                     ></v-text-field>
                   </v-col>
                 </v-row>
-              </v-form>
-            </div>
-            <!-- Forgot password? -->
-            <div class="forget-action forget-text mr-12 pr-11">
-              <a href="">Forgot password?</a>
-            </div>
+              </div>
+              <!-- Forgot password? -->
+              <div class="forget-action forget-text mr-8">
+                <a href="">Forgot password?</a>
+              </div>
 
-            <!-- Sign in Button -->
-            <div class="action text-center">
-              <v-row>
-                <v-col cols="12">
-                  <v-btn
-                    class="submit my-6"
-                    height="50px"
-                    width="70%"
-                    rounded
-                    color="#71C9CE"
-                    dark
-                  >
-                    Sign in
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </div>
-
-            <!-- bottom form-->
-            <div class="action signup-text my-2">
-              Don’t you have account? <a href=""> Sign Up</a>
-            </div>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+              <!-- Sign in Button -->
+              <div class="action text-center">
+                <v-row>
+                  <v-col cols="12" class="mt-8">
+                    <v-btn
+                      class="submit mt-8"
+                      height="50px"
+                      width="90%"
+                      rounded
+                      color="#71C9CE"
+                      dark
+                      @click="login"
+                    >
+                      Login
+                    </v-btn>
+                    <v-overlay :value="loading">
+                      <v-progress-circular
+                        indeterminate
+                        size="64"
+                      ></v-progress-circular>
+                    </v-overlay>
+                  </v-col>
+                </v-row>
+              </div>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-form>
   </v-content>
 </template>
+
+<script>
+export default {
+  name: "Login",
+  data: () => ({
+    email: "",
+    password: "",
+    loading: false,
+  }),
+  methods: {
+    isMobile() {
+      if (screen.width <= 800) {
+        return false;
+      } else if (screen.width <= 3000) {
+        return true;
+      } else {
+        return true;
+      }
+    },
+    login() {
+      this.loading = true;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .bg-login-logo {
@@ -104,7 +138,6 @@
 }
 
 .action {
-  display: flex;
   align-items: center;
   justify-content: center;
 }
