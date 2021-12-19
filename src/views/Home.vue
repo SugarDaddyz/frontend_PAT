@@ -33,7 +33,7 @@
 
 <style scoped>
 .title-text {
-  color: #3182ce;
+  color: #71C9CE;
   font-weight: bold;
   font-size: 30px;
   font-family: "Nunito", sans-serif;

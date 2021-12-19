@@ -44,6 +44,14 @@ const routes = [{
           title: 'Home',
         },
       },
+      {
+        path: 'users',
+        name: 'Users',
+        component: () => import('../views/Apps/Users/Users.vue'),
+        meta: {
+          title: 'Management Users',
+        },
+      },
     ]
   },
 

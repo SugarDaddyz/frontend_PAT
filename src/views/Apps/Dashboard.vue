@@ -55,7 +55,7 @@ export default {
       },
       {
         title: "Product",
-        icon: "mdi-cart",
+        icon: "mdi-warehouse",
         number: "1000",
         color: "#8049C7",
       },
@@ -66,7 +66,7 @@ export default {
 
 <style scoped>
 .title-text {
-  color: #3182ce;
+  color: #71C9CE;
   font-weight: bold;
   font-size: 30px;
   font-family: "Nunito", sans-serif;
