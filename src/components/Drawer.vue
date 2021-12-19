@@ -3,7 +3,7 @@
     <v-app-bar color="white" flat app>
       <v-row class="ma-4">
         <v-col cols="12">
-          <v-btn icon @click="drawer = !drawer" dark>
+          <v-btn class="float-left" icon @click="drawer = !drawer" dark>
             <v-avatar color="#71C9CE" rounded size="50"
               ><v-icon>mdi-menu</v-icon></v-avatar
             >
@@ -11,30 +11,23 @@
         </v-col>
       </v-row>
       <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
 
       <!-- Profile menu -->
       <v-row>
-        <v-col cols="6" sm="2" md="3">
+        <v-col cols="6" sm="2" md="9">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on" dark>
+              <v-btn class="float-right" icon v-bind="attrs" v-on="on" dark>
                 <v-avatar color="#71C9CE" rounded size="50"> US </v-avatar>
               </v-btn>
             </template>
             <span>Profile</span>
           </v-tooltip>
         </v-col>
-        <v-col cols="6" sm="3" md="3">
+        <v-col cols="6" sm="2" md="2">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn icon to="Login" v-bind="attrs" v-on="on" dark>
+              <v-btn class="float-right" icon to="Login" v-bind="attrs" v-on="on" dark>
                 <v-avatar color="#71C9CE" rounded size="50">
                   <v-icon>mdi-logout</v-icon>
                 </v-avatar>
@@ -110,7 +103,7 @@ export default {
       },
     ],
     // mini: true,
-    drawer: true,
+    drawer: false,
   }),
 };
 </script>
