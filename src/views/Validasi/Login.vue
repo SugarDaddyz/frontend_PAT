@@ -40,15 +40,15 @@
                   <v-col cols="12" sm="12" md="12">
                     <div class="email-title mb-1">
                       <v-icon medium color="#2a4365" class="mr-2 mx-8">
-                        mdi-email </v-icon
-                      >Email Address
+                        mdi-account </v-icon
+                      >Username
                     </div>
                     <v-text-field
                       class="mx-8"
                       color="#2a4365"
                       type="email"
                       v-model="email"
-                      placeholder="Type your email address"
+                      placeholder="Type your Username"
                       outlined
                     ></v-text-field>
                   </v-col>
@@ -70,11 +70,7 @@
                   </v-col>
                 </v-row>
               </div>
-              <!-- Forgot password? -->
-              <div class="forget-action forget-text mr-8">
-                <a href="">Forgot password?</a>
-              </div>
-
+              
               <!-- Sign in Button -->
               <div class="action text-center">
                 <v-row>
