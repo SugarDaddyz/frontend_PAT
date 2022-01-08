@@ -3,7 +3,7 @@
     <v-content>
       <v-row>
         <v-col cols="6">
-          <div class="my-8 title-text">Management Users</div>
+          <div class="my-8 title-text">Product List</div>
         </v-col>
         <v-col cols="6">
           <div class="float-right my-8 title-text">
@@ -17,7 +17,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="title-dialog ml-3">Add User</span>
+                  <span class="title-dialog ml-3">Add Product</span>
                 </v-card-title>
 
                 <v-card-text>
@@ -28,8 +28,8 @@
                         <v-text-field
                           id="terms"
                           outline
-                          v-model="editedDatas.fullName"
-                          label="Full Name"
+                          v-model="editedDatas.productName"
+                          label="Product Name"
                           outlined
                         ></v-text-field>
                       </v-col>
@@ -37,29 +37,21 @@
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           id="terms"
-                          v-model="editedDatas.username"
-                          label="Username"
+                          v-model="editedDatas.price"
+                          label="Price"
+                          prefix="Rp."
                           outlined
                         ></v-text-field>
                       </v-col>
+                      <!-- Username Form -->
                       <v-col cols="12" sm="12" md="12">
-                        <v-select
+                        <v-text-field
                           id="terms"
-                          v-model="editedDatas.role"
-                          :items="roles"
-                          label="Role"
+                          v-model="editedDatas.storeID"
+                          label="Store ID"
+                          prefix="ID."
                           outlined
-                        ></v-select>
-                      </v-col>
-
-                      <v-col cols="12" sm="12" md="12">
-                        <v-select
-                          id="terms"
-                          v-model="editedDatas.status"
-                          :items="status"
-                          label="Status"
-                          outlined
-                        ></v-select>
+                        ></v-text-field>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -161,14 +153,9 @@ export default {
       status: ["ACTIVE", "INACTIVE", "BLOCKED"],
       // Form
       headers: [
-        {
-          text: "Name",
-          align: "start",
-          value: "fullName",
-        },
-        { text: "Username", value: "username" },
-        { text: "Role", value: "role" },
-        { text: "Status", value: "status" },
+        { text: "Product Name", align: "start", value: "productName" },
+        { text: "Price", value: "price" },
+        { text: "Store ID", value: "storeID" },
         { text: "Action", value: "action", sortable: false },
       ],
       datas: [],
@@ -190,7 +177,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New User" : "Edit User";
+      return this.editedIndex === -1 ? "New Product" : "Edit Product";
     },
     isDisabled: function () {
       return !this.terms;
