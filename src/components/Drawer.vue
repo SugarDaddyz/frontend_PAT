@@ -86,7 +86,7 @@ export default {
       {
         icon: "mdi-source-branch",
         title: "Cabang",
-        tooltip: "Cabang",
+        tooltip: "Branch",
         to: "Branches",
       },
       // {
