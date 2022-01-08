@@ -1,8 +1,8 @@
+import { UserModel } from "../../models/user_model";
+
 export interface UserState {
-  id?: number;
-  firstName?: string;
-  lastName?: string;
-  username?: string;
-  roleId?: number;
-  storeId?: number;
+  isLoading?: boolean;
+  errMessage?: string;
+  isError?: boolean;
+  users: UserModel[];
 }

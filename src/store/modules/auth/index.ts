@@ -6,6 +6,7 @@ import { authMutations } from "./mutations";
 import { AuthState } from "./auth.types";
 
 const _authState: AuthState = {
+  isAuthenticated: false,
   isLoading: false,
   isError: false,
   errMessage: "",

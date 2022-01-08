@@ -37,7 +37,7 @@
               <v-btn
                 class="float-right"
                 icon
-                to="Login"
+                @click="onLogoutClicked"
                 v-bind="attrs"
                 v-on="on"
                 dark
@@ -81,6 +81,7 @@
 </template>
 
 <script>
+import { AUTH_MUTATION } from "@/store/modules/auth/mutations";
 export default {
   data: () => ({
     menus: [
@@ -119,5 +120,12 @@ export default {
     // mini: true,
     drawer: true,
   }),
+  methods: {
+    onLogoutClicked() {
+      console.log("logout clicked");
+      this.$store.commit(AUTH_MUTATION.LOGOUT_REQUEST);
+      this.$router.push({ name: "Login" });
+    },
+  },
 };
 </script>

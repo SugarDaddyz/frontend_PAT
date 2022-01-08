@@ -6,8 +6,10 @@ import { userMutations } from "./mutations";
 import { UserState } from "./user.types";
 
 const _userState: UserState = {
-  firstName: "admin",
-  lastName: "admin",
+  isLoading: false,
+  isError: false,
+  errMessage: "",
+  users: [],
 };
 
 export const userModule: Module<UserState, RootState> = {

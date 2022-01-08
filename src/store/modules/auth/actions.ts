@@ -23,10 +23,10 @@ export const userActions: ActionTree<AuthState, RootState> = {
       );
       console.log("response", res.data);
       if (res.data.status <= 201 && res.data.data) {
-        router.push({
-          name: "Dashboard",
-        });
         commit(AUTH_MUTATION.LOGIN_SUCCESS, res.data);
+        router.push({
+          name: "Home",
+        });
         return;
       }
       throw res;

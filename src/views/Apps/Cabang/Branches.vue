@@ -218,7 +218,7 @@ export default {
         { text: "Address", value: "address" },
         { text: "Action", value: "action", sortable: false },
       ],
-      datas: [],
+      datas: [{ storeName: "Main Node", address: "Dusseldorf" }],
       editedIndex: -1,
       editedDatas: {
         storeName: "",

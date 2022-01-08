@@ -23,14 +23,22 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-
                       <!-- Fullname Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           id="terms"
                           outline
-                          v-model="editedDatas.fullName"
-                          label="Full Name"
+                          v-model="firstName"
+                          label="First Name"
+                          outlined
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-text-field
+                          id="terms"
+                          outline
+                          v-model="lastName"
+                          label="Last Name"
                           outlined
                         ></v-text-field>
                       </v-col>
@@ -39,18 +47,44 @@
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           id="terms"
-                          v-model="editedDatas.username"
+                          v-model="username"
                           label="Username"
                           outlined
                         ></v-text-field>
+                      </v-col>
+
+                      <!-- Password Form -->
+                      <v-col cols="12" sm="12" md="12">
+                        <v-text-field
+                          id="terms"
+                          v-model="password"
+                          label="Password"
+                          type="password"
+                          outlined
+                        ></v-text-field>
+                      </v-col>
+
+                      <!-- Cabang Dropdown Form -->
+                      <v-col cols="12" sm="12" md="12">
+                        <v-select
+                          id="terms"
+                          v-model="selectedBranch"
+                          :items="branches"
+                          item-text="name"
+                          item-value="id"
+                          label="Store"
+                          outlined
+                        ></v-select>
                       </v-col>
 
                       <!-- Role Dropdown Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-select
                           id="terms"
-                          v-model="editedDatas.role"
+                          v-model="selectedRole"
                           :items="roles"
+                          item-text="name"
+                          item-value="id"
                           label="Role"
                           outlined
                         ></v-select>
@@ -60,7 +94,7 @@
                       <v-col cols="12" sm="12" md="12">
                         <v-select
                           id="terms"
-                          v-model="editedDatas.status"
+                          v-model="selectedStatus"
                           :items="status"
                           label="Status"
                           outlined
@@ -106,7 +140,7 @@
           <div>
             <v-data-table
               :headers="headers"
-              :items="datas"
+              :items="user.users"
               :page.sync="page"
               :items-per-page="itemsPerPage"
               hide-default-footer
@@ -120,7 +154,7 @@
                   text-color="white"
                   class="mx-1"
                 >
-                  {{ item.role }}
+                  {{ item.roleId }}
                 </v-chip>
               </template>
               <template v-slot:[`item.action`]="{ item }">
@@ -145,6 +179,9 @@
               ></v-pagination>
             </div>
           </div>
+          <v-overlay :value="user.isLoading">
+            <v-progress-circular indeterminate size="64"> </v-progress-circular>
+          </v-overlay>
         </v-col>
       </v-row>
     </v-content>
@@ -152,6 +189,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapGetters, mapState } from "vuex";
+import { baseUrl } from "@/constants/constants";
 export default {
   data() {
     return {
@@ -161,18 +201,26 @@ export default {
       page: 1,
       pageCount: 0,
       itemsPerPage: 10,
+      firstName: "",
+      lastName: "",
+      username: "",
+      password: "",
+      selectedRole: 0,
+      selectedStatus: "",
+      selectedStoreId: 0,
+      selectedBranch: "",
       // array Role
-      roles: [1, 2, 3],
+      branches: [],
+      roles: [
+        { id: 1, name: "Admin" },
+        { id: 2, name: "Manager" },
+      ],
       status: ["ACTIVE", "INACTIVE", "BLOCKED"],
       // Form
       headers: [
-        {
-          text: "Name",
-          align: "start",
-          value: "fullName",
-        },
         { text: "Username", value: "username" },
-        { text: "Role", value: "role" },
+        { text: "Cabang", value: "store.name" },
+        { text: "Role", value: "role.name" },
         { text: "Status", value: "status" },
         { text: "Action", value: "action", sortable: false },
       ],
@@ -210,24 +258,62 @@ export default {
       val || this.closeDelete();
     },
   },
+  computed: {
+    ...mapState({
+      auth: (state) => state.auth,
+      user: (state) => state.user,
+    }),
+    ...mapGetters(["getAccessToken"]),
+  },
 
   created() {
     this.initialize();
+    // this.getRoleList();
+  },
+  mounted() {
+    this.getStoreList();
   },
 
   methods: {
+    async getRoleList() {
+      try {
+        const res = await axios.get(`${baseUrl}/user/role`);
+        this.roles = res.data.data;
+      } catch (error) {
+        console.log("error ", error);
+      }
+    },
+    async getStoreList() {
+      try {
+        const res = await axios.get(`${baseUrl}/store`, {
+          headers: {
+            Authorization: `Bearer ${this.auth.auth.accessToken}`,
+          },
+        });
+        this.branches = res.data.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     initialize() {
+      this.$store.dispatch("getUserList");
       this.datas = [];
     },
 
     editItem(item) {
-      this.editedIndex = this.datas.indexOf(item);
-      this.editedDatas = Object.assign({}, item);
+      this.firstName = item.firstName;
+      this.lastName = item.lastName;
+      this.username = item.username;
+      this.selectedBranch = item.selectedBranch;
+      this.selectedRole = item.selectedRole;
+      this.selectedStatus = item.selectedStatus;
+
+      this.editedIndex = item.id;
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.datas.indexOf(item);
+      this.editedIndex = item.id;
       this.editeddatas = Object.assign({}, item);
       this.dialogDelete = true;
     },
@@ -254,10 +340,49 @@ export default {
     },
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.datas[this.editedIndex], this.editedDatas);
+        const {
+          firstName,
+          lastName,
+          selectedRole,
+          selectedStatus,
+          selectedBranch,
+          username,
+          password,
+        } = this;
+        this.$store.dispatch("editOneUser", {
+          id: this.editedIndex,
+          firstName,
+          lastName,
+          username,
+          password,
+          roleId: selectedRole,
+          status: selectedStatus,
+          storeId: selectedBranch,
+        });
       } else {
-        this.datas.push(this.editedDatas);
+        const {
+          firstName,
+          lastName,
+          selectedRole,
+          selectedStatus,
+          selectedBranch,
+          username,
+          password,
+        } = this;
+        this.$store.dispatch("addNewUser", {
+          firstName,
+          lastName,
+          username,
+          password,
+          roleId: selectedRole,
+          status: selectedStatus,
+          storeId: selectedBranch,
+        });
       }
+      this.firstName = "";
+      this.lastName = "";
+      this.username = "";
+      this.password = "";
       this.close();
     },
   },

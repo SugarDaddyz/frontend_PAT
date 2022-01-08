@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Validasi/Login.vue";
 import Layout from "../views/Layout.vue";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -29,22 +30,25 @@ const routes = [
   {
     path: "/",
     name: "Layout",
+    meta: {},
     component: Layout,
     children: [
-      {
-        path: "dashboard",
-        name: "Dashboard",
-        component: () => import("../views/Apps/Dashboard.vue"),
-        meta: {
-          title: "Dashboard",
-        },
-      },
       {
         path: "home",
         name: "Home",
         component: Home,
         meta: {
           title: "Home",
+          requiredAuthentication: true,
+        },
+      },
+      {
+        path: "dashboard",
+        name: "Dashboard",
+        component: () => import("../views/Apps/Dashboard.vue"),
+        meta: {
+          title: "Dashboard",
+          requiredAuthentication: true,
         },
       },
       {
@@ -53,6 +57,7 @@ const routes = [
         component: () => import("../views/Apps/Users/Users.vue"),
         meta: {
           title: "Management Users",
+          requiredAuthentication: true,
         },
       },
       {
@@ -61,6 +66,7 @@ const routes = [
         component: () => import("../views/Apps/Cabang/Branches.vue"),
         meta: {
           title: "Cabang List",
+          requiredAuthentication: true,
         },
       },
       {
@@ -69,6 +75,7 @@ const routes = [
         component: () => import("../views/Apps/Cabang/DetailBranches.vue"),
         meta: {
           title: "Detail Cabang",
+          requiredAuthentication: true,
         },
       },
       {
@@ -77,6 +84,7 @@ const routes = [
         component: () => import("../views/Apps/Products/Products.vue"),
         meta: {
           title: "Product List",
+          requiredAuthentication: true,
         },
       },
     ],
@@ -91,7 +99,17 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = "CAYN";
-  next();
+  console.log(store.state.auth);
+  console.log("auth getters", store.getters.isAuthenticated);
+  if (to.matched.some((record) => record.meta.requiredAuthentication)) {
+    if (store.getters.isAuthenticated) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
 });
 
 export default router;
