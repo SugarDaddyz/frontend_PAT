@@ -23,6 +23,7 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
+
                       <!-- Fullname Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
@@ -33,6 +34,7 @@
                           outlined
                         ></v-text-field>
                       </v-col>
+
                       <!-- Username Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
@@ -42,6 +44,8 @@
                           outlined
                         ></v-text-field>
                       </v-col>
+
+                      <!-- Role Dropdown Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-select
                           id="terms"
@@ -52,6 +56,7 @@
                         ></v-select>
                       </v-col>
 
+                      <!-- Status Dropdown Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-select
                           id="terms"
@@ -77,7 +82,7 @@
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
                 <v-card-title class="text-h5"
-                  >Are you sure you want to delete this item?</v-card-title
+                  >Are you sure you want to delete this user?</v-card-title
                 >
                 <v-card-actions>
                   <v-spacer></v-spacer>

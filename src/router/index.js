@@ -53,6 +53,22 @@ const routes = [{
         },
       },
       {
+        path: 'cabang',
+        name: 'Branches',
+        component: () => import('../views/Apps/Cabang/Branches.vue'),
+        meta: {
+          title: 'Cabang List',
+        },
+      },
+      {
+        path: 'cabang/detail',
+        name: 'BranchesDetail',
+        component: () => import('../views/Apps/Cabang/DetailBranches.vue'),
+        meta: {
+          title: 'Detail Cabang',
+        },
+      },
+      {
         path: 'products',
         name: 'Products',
         component: () => import('../views/Apps/Products/Products.vue'),

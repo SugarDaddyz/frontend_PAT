@@ -3,7 +3,7 @@
     <v-content>
       <v-row>
         <v-col cols="6">
-          <div class="my-8 title-text">Product List</div>
+          <div class="my-8 title-text">Cabang List</div>
         </v-col>
         <v-col cols="6">
           <div class="float-right my-8 title-text">
@@ -17,45 +17,31 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="title-dialog ml-3">Add Product</span>
+                  <span class="title-dialog ml-3">Add Store</span>
                 </v-card-title>
 
                 <v-card-text>
                   <v-container>
                     <v-row>
-
-                      <!-- Product Name Form -->
+                      <!-- Store Name Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           id="terms"
                           outline
-                          v-model="editedDatas.productName"
-                          label="Product Name"
+                          v-model="editedDatas.storeName"
+                          label="Store Name"
                           outlined
                         ></v-text-field>
                       </v-col>
-
-                      <!-- Price Form -->
+                      <!-- Address Form -->
                       <v-col cols="12" sm="12" md="12">
-                        <v-text-field
+                        <v-textarea
                           id="terms"
-                          v-model="editedDatas.price"
-                          label="Price"
-                          prefix="Rp."
+                          v-model="editedDatas.address"
+                          label="Address"
                           outlined
-                        ></v-text-field>
+                        ></v-textarea>
                       </v-col>
-
-                      <!-- Store ID Form -->
-                      <!-- <v-col cols="12" sm="12" md="12">
-                        <v-text-field
-                          id="terms"
-                          v-model="editedDatas.storeID"
-                          label="Store ID"
-                          prefix="ID."
-                          outlined
-                        ></v-text-field>
-                      </v-col> -->
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -72,7 +58,7 @@
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
                 <v-card-title class="text-h5"
-                  >Are you sure you want to delete this product?</v-card-title
+                  >Are you sure you want to delete this Cabang?</v-card-title
                 >
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -123,6 +109,10 @@
                   <v-btn icon color="#71c9ce" dark>
                     <v-icon @click="deleteItem(item)">mdi-trash-can</v-icon>
                   </v-btn>
+                  <!-- See Detail Action -->
+                  <v-btn icon color="#71c9ce" dark>
+                    <v-icon @click="detailItem">mdi-eye</v-icon>
+                  </v-btn>
                 </v-row>
               </template>
             </v-data-table>
@@ -153,19 +143,19 @@ export default {
       itemsPerPage: 10,
       // Form
       headers: [
-        { text: "Product Name", align: "start", value: "productName" },
-        { text: "Price", value: "price" },
+        { text: "Store Name", align: "start", value: "storeName" },
+        { text: "Address", value: "address" },
         { text: "Action", value: "action", sortable: false },
       ],
       datas: [],
       editedIndex: -1,
       editedDatas: {
-        productName: "",
-        price: "",
+        storeName: "",
+        address: "",
       },
       defaultDatas: {
-        productName: "",
-        price: "",
+        storeName: "",
+        address: "",
       },
     };
   },
@@ -212,6 +202,10 @@ export default {
     deleteItemConfirm() {
       this.datas.splice(this.editedIndex, 1);
       this.closeDelete();
+    },
+
+    detailItem() {
+      this.$router.push({ name: "BranchesDetail" });
     },
 
     closeDelete() {
