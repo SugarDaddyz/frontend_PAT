@@ -23,7 +23,8 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <!-- Fullname Form -->
+
+                      <!-- Product Name Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           id="terms"
@@ -33,7 +34,8 @@
                           outlined
                         ></v-text-field>
                       </v-col>
-                      <!-- Username Form -->
+
+                      <!-- Price Form -->
                       <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           id="terms"
@@ -43,8 +45,9 @@
                           outlined
                         ></v-text-field>
                       </v-col>
-                      <!-- Username Form -->
-                      <v-col cols="12" sm="12" md="12">
+
+                      <!-- Store ID Form -->
+                      <!-- <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           id="terms"
                           v-model="editedDatas.storeID"
@@ -52,7 +55,7 @@
                           prefix="ID."
                           outlined
                         ></v-text-field>
-                      </v-col>
+                      </v-col> -->
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -69,7 +72,7 @@
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
                 <v-card-title class="text-h5"
-                  >Are you sure you want to delete this item?</v-card-title
+                  >Are you sure you want to delete this product?</v-card-title
                 >
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -148,29 +151,21 @@ export default {
       page: 1,
       pageCount: 0,
       itemsPerPage: 10,
-      // array Role
-      roles: [1, 2, 3],
-      status: ["ACTIVE", "INACTIVE", "BLOCKED"],
       // Form
       headers: [
         { text: "Product Name", align: "start", value: "productName" },
         { text: "Price", value: "price" },
-        { text: "Store ID", value: "storeID" },
         { text: "Action", value: "action", sortable: false },
       ],
       datas: [],
       editedIndex: -1,
       editedDatas: {
-        name: "",
-        email: "",
-        role: "",
-        status: "",
+        productName: "",
+        price: "",
       },
       defaultDatas: {
-        name: "",
-        email: "",
-        role: "",
-        status: "",
+        productName: "",
+        price: "",
       },
     };
   },

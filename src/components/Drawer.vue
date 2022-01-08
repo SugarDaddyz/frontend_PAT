@@ -100,8 +100,8 @@ export default {
       {
         icon: "mdi-source-branch",
         title: "Cabang",
-        tooltip: "Cabang",
-        to: "Cabang",
+        tooltip: "Branch",
+        to: "Branches",
       },
       // {
       //   icon: "mdi-cash-register",

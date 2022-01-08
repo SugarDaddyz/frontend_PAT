@@ -18,15 +18,16 @@ const routes = [
   },
 
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: Login,
     meta: {
       title: "Login",
     },
   },
+
   {
-    path: "/Home",
+    path: "/",
     name: "Layout",
     component: Layout,
     children: [
@@ -39,11 +40,35 @@ const routes = [
         },
       },
       {
+        path: "home",
+        name: "Home",
+        component: Home,
+        meta: {
+          title: "Home",
+        },
+      },
+      {
         path: "users",
         name: "Users",
         component: () => import("../views/Apps/Users/Users.vue"),
         meta: {
           title: "Management Users",
+        },
+      },
+      {
+        path: "cabang",
+        name: "Branches",
+        component: () => import("../views/Apps/Cabang/Branches.vue"),
+        meta: {
+          title: "Cabang List",
+        },
+      },
+      {
+        path: "cabang/detail",
+        name: "BranchesDetail",
+        component: () => import("../views/Apps/Cabang/DetailBranches.vue"),
+        meta: {
+          title: "Detail Cabang",
         },
       },
       {
@@ -65,7 +90,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta?.title ?? "CAYN"}`;
+  document.title = "CAYN";
   next();
 });
 
