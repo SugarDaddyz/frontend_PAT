@@ -108,7 +108,7 @@
               class="elevation-1"
               @page-count="pageCount = $event"
             >
-              <template v-slot:item.role="{ item }">
+              <template v-slot:[`item.role`]="{ item }">
                 <v-chip
                   multiple
                   color="#71c9ce"
@@ -118,7 +118,7 @@
                   {{ item.role }}
                 </v-chip>
               </template>
-              <template v-slot:item.action="{ item }">
+              <template v-slot:[`item.action`]="{ item }">
                 <v-row>
                   <!-- Edit Action -->
                   <v-btn icon @click="editItem(item)" color="#71c9ce" dark>

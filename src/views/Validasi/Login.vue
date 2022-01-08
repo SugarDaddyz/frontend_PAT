@@ -70,7 +70,7 @@
                   </v-col>
                 </v-row>
               </div>
-              
+
               <!-- Sign in Button -->
               <div class="action text-center">
                 <v-row>
@@ -82,16 +82,19 @@
                       rounded
                       color="#71C9CE"
                       dark
-                      @click="login"
+                      @click="loginClick"
                     >
                       Login
                     </v-btn>
-                    <v-overlay :value="loading">
-                      <v-progress-circular
-                        indeterminate
-                        size="64"
-                      ></v-progress-circular>
+                    <v-overlay :value="auth.isLoading">
+                      <v-progress-circular indeterminate size="64">
+                      </v-progress-circular>
                     </v-overlay>
+                    <v-dialog :value="auth.isError">
+                      <div class="text-center my-8 login-text">
+                        {{ auth.errMessage }}
+                      </div>
+                    </v-dialog>
                   </v-col>
                 </v-row>
               </div>
@@ -104,6 +107,9 @@
 </template>
 
 <script>
+import VueRouter from "vue-router";
+import { mapGetters, mapState } from "vuex";
+
 export default {
   name: "Login",
   data: () => ({
@@ -111,6 +117,11 @@ export default {
     password: "",
     loading: false,
   }),
+  computed: {
+    ...mapState({
+      auth: (state) => state.auth,
+    }),
+  },
   methods: {
     isMobile() {
       if (screen.width <= 800) {
@@ -121,9 +132,12 @@ export default {
         return true;
       }
     },
-    login() {
-      this.loading = true;
-      this.$router.push({ name: "Home" });
+    loginClick() {
+      this.$store.dispatch("login", {
+        username: this.email,
+        password: this.password,
+      });
+      // this.$router.push({ name: "Home" });
     },
   },
 };

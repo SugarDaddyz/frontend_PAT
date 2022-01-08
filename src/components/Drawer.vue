@@ -17,7 +17,14 @@
         <v-col cols="6" sm="2" md="9">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn class="float-right" @click="dialog = true" icon v-bind="attrs" v-on="on" dark>
+              <v-btn
+                class="float-right"
+                @click="dialog = true"
+                icon
+                v-bind="attrs"
+                v-on="on"
+                dark
+              >
                 <v-avatar color="#71C9CE" rounded size="50"> US </v-avatar>
               </v-btn>
             </template>
@@ -27,7 +34,14 @@
         <v-col cols="6" sm="2" md="2">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn class="float-right" icon to="Login" v-bind="attrs" v-on="on" dark>
+              <v-btn
+                class="float-right"
+                icon
+                to="Login"
+                v-bind="attrs"
+                v-on="on"
+                dark
+              >
                 <v-avatar color="#71C9CE" rounded size="50">
                   <v-icon>mdi-logout</v-icon>
                 </v-avatar>
