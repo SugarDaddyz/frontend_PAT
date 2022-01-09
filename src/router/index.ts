@@ -30,7 +30,9 @@ const routes = [
   {
     path: "/",
     name: "Layout",
-    meta: {},
+    meta: {
+      requiredAuthentication: true,
+    },
     component: Layout,
     children: [
       {
@@ -98,7 +100,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = "CAYN";
+  document.title = to.meta?.title ?? "CAYN";
   console.log(store.state.auth);
   console.log("auth getters", store.getters.isAuthenticated);
   if (to.matched.some((record) => record.meta.requiredAuthentication)) {
